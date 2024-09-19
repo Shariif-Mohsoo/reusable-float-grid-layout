@@ -1,0 +1,111 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+:root {
+  --grid-width: 114rem;
+  --gutter-vertical: 8rem;
+  --gutter-horizontal: 6rem;
+  --gutter-vertical-small: 6rem;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 500;
+  background: linear-gradient(to right bottom, #117864, #0b5345) no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+/*
+@mixin clearfix
+{
+    &::after
+    {
+        content:"";
+        display:table;
+        clear:both;
+    }
+}
+*/
+.row {
+  max-width: var(--grid-width);
+  background-color: #eee;
+  margin: 0 auto;
+}
+.row:first-child {
+  margin-top: 4rem;
+}
+.row:not(:last-child) {
+  margin-bottom: var(--gutter-vertical);
+}
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The below written code is very very mandatory for each type of column layout */
+/* TO MAKE ALL OF THIS RESPONSIVE ALSO KINDLY MAKE SURE TO COPY CODE FROM THE END ALSO */
+[class^="col-"] {
+  background-color: olivedrab;
+  text-align: center;
+  padding: 2rem;
+  color: #fff;
+  float: left;
+}
+[class^="col-"]:not(:last-child) {
+  margin-right: var(--gutter-horizontal);
+}
+/* columns start */
+
+.col-1-of-2 {
+  width: calc((100% - var(--gutter-horizontal)) / 2);
+  /* BECAUSE OF FLOAT PARENT ELEMENT LOST ITS HEIGHT SO DO CLEARFIX */
+}
+
+.col-1-of-3 {
+  width: calc((100% - 2 * var(--gutter-horizontal)) / 3);
+}
+.col-1-of-4 {
+  width: calc((100% - 3 * var(--gutter-horizontal)) / 4);
+}
+
+.col-2-of-3 {
+  width: calc(
+    2 * ((100% - 2 * var(--gutter-horizontal)) / 3) + var(--gutter-horizontal)
+  );
+}
+
+.col-2-of-4 {
+  width: calc(
+    2 * ((100% - 3 * var(--gutter-horizontal)) / 4) + var(--gutter-horizontal)
+  );
+}
+
+.col-3-of-4 {
+  width: calc(
+    3 * ((100% - 3 * var(--gutter-horizontal)) / 4) +
+      (2 * var(--gutter-horizontal))
+  );
+}
+
+/* FOR RESPONSIVE NESS 56.25em is 900px*/
+.row {
+  @media only screen and (max-width: 56.25em) {
+    max-width: 50rem;
+    padding: 0 3rem;
+  }
+}
+[class^="col-"] {
+  @media only screen and (max-width: 56.25em) {
+    margin-right: 0;
+    width: 100% !important;
+    margin-bottom: var(--gutter-vertical-small);
+  }
+}
